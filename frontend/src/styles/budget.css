@@ -1,0 +1,118 @@
+.budget-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  min-width: 0;
+  justify-content: flex-end;
+}
+
+.budget-meter {
+  min-width: 132px;
+  flex: 0 1 168px;
+}
+
+.budget-meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.budget-name {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--dash-text, #1a1a1a);
+}
+
+.budget-nums {
+  font-size: 10px;
+  color: var(--dash-muted, rgba(26, 26, 26, 0.56));
+  font-variant-numeric: tabular-nums;
+}
+
+.budget-track {
+  height: 3px;
+  background: rgba(26, 26, 26, 0.12);
+  overflow: hidden;
+}
+
+.budget-fill {
+  height: 100%;
+  background: #8fbf5a;
+  transition: width 240ms ease;
+}
+
+.send-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--dash-muted, rgba(26, 26, 26, 0.56));
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+
+.send-toggle input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.send-switch {
+  width: 34px;
+  height: 20px;
+  background: rgba(26, 26, 26, 0.16);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.send-switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(26, 26, 26, 0.16);
+  transition: transform 180ms ease-out;
+}
+
+.send-toggle:active .send-switch {
+  transform: scale(0.96);
+}
+
+.send-toggle.is-live {
+  color: #9b2c2c;
+}
+
+.send-toggle.is-live .send-switch {
+  background: #e07a6e;
+}
+
+.send-toggle.is-live .send-switch::after {
+  transform: translateX(14px);
+}
+
+.send-toggle:focus-within .send-switch {
+  outline: 2px solid #1a1a1a;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .budget-fill,
+  .send-switch::after {
+    transition: none;
+  }
+
+  .send-toggle:active .send-switch {
+    transform: none;
+  }
+}
