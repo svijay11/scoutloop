@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { FALLBACK_STATS } from "../demoData.js";
 import { fetchStats } from "../api.js";
+import BlurText from "../components/BlurText.jsx";
 import useLandingMotion, { useLandingBodyClass } from "../landing/useLandingMotion.js";
 import "../styles/landing.css";
 
@@ -118,7 +119,17 @@ export default function Landing() {
       </header>
 
       <section className="df-hero">
-        <h1 className="df-hero-title">The outbound agent for developer tools</h1>
+        <h1 className="df-hero-title">
+          <BlurText
+            as="span"
+            text="The outbound agent for developer tools"
+            delay={200}
+            animateBy="words"
+            direction="top"
+            stepDuration={0.45}
+            className="df-hero-blur"
+          />
+        </h1>
         <p className="df-hero-sub">
           Scoutloop finds GitHub developers who are already hitting a problem, researches the
           repo, looks up a solution, and drafts an email the critic will actually sign.

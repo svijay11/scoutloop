@@ -59,22 +59,16 @@ export default function useLandingMotion(root) {
 
       if (reduce) {
         gsap.set(
-          ".df-hero-title, .df-hero-sub, .df-hero-cta, .df-hero-stage, .df-panel, .df-manifesto p, .df-scan-row, .df-skel, .df-insight, .df-reveal",
+          ".df-hero-sub, .df-hero-cta, .df-hero-stage, .df-panel, .df-manifesto p, .df-scan-row, .df-skel, .df-insight, .df-reveal",
           { clearProps: "all", opacity: 1, y: 0, visibility: "visible" }
         );
         if (typed) typed.textContent = typed.getAttribute("data-type") || "";
       } else {
-        gsap.from(".df-hero-title", {
-          y: 18,
-          opacity: 0,
-          duration: 0.9,
-          ease: "power3.out",
-        });
         gsap.from(".df-hero-sub", {
           y: 14,
           opacity: 0,
           duration: 0.85,
-          delay: 0.1,
+          delay: 0.22,
           ease: "power3.out",
         });
         gsap.from(".df-hero-cta", {

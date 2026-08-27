@@ -8,6 +8,20 @@ from typing import Optional
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
+
+NO_STORE = {"Cache-Control": "no-store, max-age=0"}
+
+
+def _index_page() -> FileResponse | JSONResponse:
+    index = FRONTEND_DIST / "index.html"
+    if index.is_file():
+        return FileResponse(index, headers=NO_STORE)
+    return JSONResponse(
+        {
+            "service": "scoutloop",
+            "hint": "frontend not built — run scoutloop serve or npm run build in frontend/",
+        }
+    )
 from pydantic import BaseModel, Field
 
 from backend import db
@@ -149,15 +163,7 @@ def api_set_settings(req: SettingsRequest) -> dict:
 
 @app.get("/")
 def landing():
-    index = FRONTEND_DIST / "index.html"
-    if index.is_file():
-        return FileResponse(index)
-    return JSONResponse(
-        {
-            "service": "scoutloop",
-            "hint": "frontend not built — run scoutloop serve or npm run build in frontend/",
-        }
-    )
+    return _index_page()
 
 
 @app.get("/{path:path}")
@@ -167,7 +173,4 @@ def spa(path: str):
     candidate = FRONTEND_DIST / path
     if candidate.is_file():
         return FileResponse(candidate)
-    index = FRONTEND_DIST / "index.html"
-    if index.is_file():
-        return FileResponse(index)
-    raise HTTPException(404, "frontend not built")
+    return _index_page()
